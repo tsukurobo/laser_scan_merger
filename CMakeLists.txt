@@ -22,23 +22,14 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-# build
-set(COMPONENT_NAME component_${PROJECT_NAME})
-ament_auto_add_library(${COMPONENT_NAME} SHARED ./src/laser_scan_merger.cpp)
-target_include_directories(${COMPONENT_NAME} PUBLIC include)
-rclcpp_components_register_nodes(${COMPONENT_NAME} "util::LaserScanMerger"
+ament_auto_add_library(laser_scan_merger SHARED ./src/laser_scan_merger.cpp)
+target_include_directories(laser_scan_merger PUBLIC include)
+rclcpp_components_register_node(laser_scan_merger
   PLUGIN "util::LaserScanMerger"
-  EXECUTABLE ${PROJECT_NAME}_node
+  EXECUTABLE laser_scan_merger_node
 )
 
-# install
-install(TARGETS ${COMPONENT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
-
-install(DIRECTORY launch config rviz test
+install(DIRECTORY launch config rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
