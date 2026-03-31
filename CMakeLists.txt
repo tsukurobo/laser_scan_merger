@@ -26,7 +26,10 @@ ament_auto_find_build_dependencies()
 set(COMPONENT_NAME component_${PROJECT_NAME})
 ament_auto_add_library(${COMPONENT_NAME} SHARED ./src/laser_scan_merger.cpp)
 target_include_directories(${COMPONENT_NAME} PUBLIC include)
-rclcpp_components_register_nodes(${COMPONENT_NAME} "util::LaserScanMerger")
+rclcpp_components_register_nodes(${COMPONENT_NAME} "util::LaserScanMerger"
+  PLUGIN "util::LaserScanMerger"
+  EXECUTABLE ${PROJECT_NAME}_node
+)
 
 # install
 install(TARGETS ${COMPONENT_NAME}
