@@ -59,7 +59,7 @@ namespace util
   class LaserScanMerger : public rclcpp::Node
   {
   public:
-    typedef pcl::PointXYZI PointT;
+    typedef pcl::PointXYZ PointT;
     typedef pcl::PointCloud<PointT> pointCloudT;
     typedef sensor_msgs::msg::LaserScan laserScanMsgT;
     typedef sensor_msgs::msg::LaserScan::ConstSharedPtr laserScanCBMsgPtrT;
