@@ -31,7 +31,9 @@ namespace util
     : rclcpp::Node{"component_laser_scan_merger", opts}
     , buffer_{std::make_unique<tf2_ros::Buffer>(get_clock())}
     , tf_listener_{std::make_shared<tf2_ros::TransformListener>(*buffer_)}
-    , qos_prof_{5}
+    // Do not retain old sensor samples while a merge callback is running.
+    // The message_filters synchronizer has its own (configurable) queue.
+    , qos_prof_{1}
     , debug_{false}
     , first_callback_{true}
     , moving_frames_{false}
